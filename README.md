@@ -1,2 +1,2 @@
-# meetup-madness
-A decision-making game where "No" is not an option... for long!
+# Meetup Madness
+Click wisely. Or don’t. Either way, things will change.
