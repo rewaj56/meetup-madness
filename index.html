@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="assets/favicon.png" type="image/x-icon">
+    <title>Reunion Yes or No</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Spicy+Rice&display=swap');
+
+        * {
+            /* border: 1px solid green; */
+        }
+
+        body {
+            font-family: 'Spicy Rice', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: lightblue;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 5rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            color: #404040;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr 2fr;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            place-items: center;
+        }
+
+        img {
+            width: 200px;
+            height: auto;
+            margin-top: 20px;
+            border-radius: 50%;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #yesButton,
+        #noButton {
+            font-family: 'Spicy Rice', sans-serif;
+            background: white;
+            padding: 2rem 3rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin: 10px;
+            transition: 0.3s;
+        }
+
+        #yesButton:hover {
+            background-color: lightgreen;
+        }
+
+        #noButton:hover {
+            background-color: lightcoral;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Feel like meeting up?</h1>
+        <h2>It's been a while, let's catch up! 😎</h2>
+        <div class="content">
+            <button id="yesButton">Yes</button>
+            <button id="noButton">No</button>
+            <img id="image"
+                src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExcTZmenU0YmR4Y3Nxd21pNjZ5bXEwMXp6NDg5NXh1YWdodm1uZ2tkNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/GJWtNQDSAQ7u4Xnpj6/giphy.gif"
+                alt="Excited GIF">
+        </div>
+    </div>
+
+    <script>
+        let clickCount = 0;
+        const yesButton = document.getElementById('yesButton');
+        const noButton = document.getElementById('noButton');
+        const heading = document.querySelector('h1');
+        const subheading = document.querySelector('h2');
+        const image = document.getElementById('image');
+
+        const imageUrls = [
+            'https://media.giphy.com/media/bHnGSrvOiNASrbEg5H/giphy.gif?cid=ecf05e47czndca85lp3iepieuok7c6pex59c56we3twrnvjo&ep=v1_gifs_search&rid=giphy.gif&ct=g',
+            'https://media.giphy.com/media/hq8nghrTMVMQwcCmpu/giphy.gif?cid=ecf05e47m5sc885q4t5rquttt6wfehtsutq6k06tt6m5yn2a&ep=v1_gifs_related&rid=giphy.gif&ct=g',
+            'https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ2V0eXN3bDdid3pqMjh0NDE5bDljM3lxYTNzM3ZwN2U3ZmM5OG91YyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/9KNWMLBcr5ydeFP6Jf/giphy.gif',
+            'https://media.giphy.com/media/qLYiQ9fvExZM1ZE4WK/giphy.gif?cid=ecf05e47ovzsyksvlns0k9t50wqks2s8f3zzyebv40w5y6f9&ep=v1_gifs_related&rid=giphy.gif&ct=g',
+        ];
+
+        const headings = [
+            "Nooo, this isn't happening! 😱",
+            "Why are you doing this to me? 😭",
+            "Ugh, why can't you just say YES already?! 😤",
+            "I can't take this anymore! 🤬💥",
+        ];
+
+        const subheadings = [
+            "This can't be real...",
+            "Please, someone hand me a tissue...",
+            "I'm losing my patience!", 
+            "This is getting out of hand!",
+        ];
+
+        const originalSize = 1;
+        let imageIndex = 0;
+        let headingIndex = 0;
+        let subheadingIndex = 0;
+
+        noButton.addEventListener('click', () => {
+            clickCount++;
+
+            let scaleFactor = 1 + (clickCount * 0.2);
+            let noScale = Math.max(0, 1 - (clickCount * 0.2));
+
+            image.src = imageUrls[imageIndex];
+            heading.textContent = headings[headingIndex];
+            subheading.textContent = subheadings[subheadingIndex];
+
+            imageIndex = (imageIndex + 1) % imageUrls.length;
+            headingIndex = (headingIndex + 1) % headings.length;
+            subheadingIndex = (subheadingIndex + 1) % subheadings.length;
+
+            if (noScale === 0) {
+                yesButton.style.position = "fixed";
+                yesButton.style.top = "0";
+                yesButton.style.left = "0";
+                yesButton.style.width = "100vw";
+                yesButton.style.height = "100vh";
+                yesButton.style.fontSize = "3rem";
+                noButton.style.visibility = "hidden";
+            } else {
+                yesButton.style.transform = `scale(${scaleFactor})`;
+                noButton.style.transform = `scale(${noScale})`;
+            }
+        });
+
+        yesButton.addEventListener('click', () => {
+            yesButton.style.transform = `scale(${originalSize})`;
+            yesButton.style.position = "static";
+            yesButton.style.width = "";
+            yesButton.style.height = "";
+            yesButton.style.fontSize = "";
+            heading.textContent = "YES! See you there! 🎊";
+            subheading.textContent = "It's going to be awesome!";
+            image.src = "https://media.giphy.com/media/XrPGabMUta11ckTBpP/giphy.gif";
+
+            yesButton.style.transform = `scale(${originalSize})`;
+            yesButton.style.backgroundColor = "lightgray";
+        });
+
+    </script>
+</body>
+
+</html>
