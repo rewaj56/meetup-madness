@@ -28,12 +28,15 @@
 
         .container {
             text-align: center;
-            width: 100vw;
+            max-width: 98vw;
+            max-height: 98vh;
+            padding: 1rem;
         }
 
         h1 {
             color: #333;
             font-size: 5rem;
+            margin-top: 0;
         }
 
         h2 {
@@ -43,7 +46,7 @@
 
         .content {
             display: grid;
-            grid-template-columns: 1fr 1fr 2fr;
+            grid-template-columns: 1fr 1fr;
             padding-top: 1rem;
             padding-bottom: 1rem;
             place-items: center;
@@ -87,6 +90,16 @@
             right: 0.5rem;
             color: #555555;
         }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 4rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+        }
     </style>
 </head>
 
@@ -96,8 +109,10 @@
         <h1>Feel like meeting up?</h1>
         <h2>It's been a while, let's catch up! 😎</h2>
         <div class="content">
-            <button id="yesButton">Yes</button>
-            <button id="noButton">No</button>
+            <div class="buttons">
+                <button id="yesButton">Yes</button>
+                <button id="noButton">No</button>
+            </div>
             <img id="image"
                 src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExcTZmenU0YmR4Y3Nxd21pNjZ5bXEwMXp6NDg5NXh1YWdodm1uZ2tkNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/GJWtNQDSAQ7u4Xnpj6/giphy.gif"
                 alt="Excited GIF">
